@@ -1,0 +1,23 @@
+//1.recuperer tous les projets grace à fetch + asyn 
+//___test1_______________________
+//async function gallery() {
+// const response = await fetch('http://localhost:5678/api/works');
+//  const works = await response.json();
+//  console.log("chargement ok")
+//}
+//gallery()
+
+//const workObjets = works.filter(work => work.categoryId === 2);
+//console.log("Objets filtrés :", workObjets);
+//_____test2___________________
+//const works = fetch('http://localhost:5678/api/works')
+// .then(response => { return response.json() })
+// .then(console.log("chargement ok"))
+// .then(data => { console.log("données traitées:", data) })
+
+//console.log(works)
+//______________________________
+// 2.fetch pour recup les projets par categorie, puis une fonction filtre avec parametre Category(id:1)
+//const workCategorieObjet { }
+//const workObjets = works.filter(work => work.categoryId === 2)
+//console.log(workObjets)

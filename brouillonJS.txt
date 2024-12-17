@@ -21,3 +21,6 @@
 //const workCategorieObjet { }
 //const workObjets = works.filter(work => work.categoryId === 2)
 //console.log(workObjets)
+
+Notes: 
+Return "map" -> permet de transformé les informations recupérées et filtrées en HTML

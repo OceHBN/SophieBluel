@@ -22,5 +22,21 @@
 //const workObjets = works.filter(work => work.categoryId === 2)
 //console.log(workObjets)
 
+2.lancer la page de navigation 
+//PAGE DE CONNEXION
+//Recupérer la liste de navigation
+const boutonsNav = document.querySelectorAll('ul > li')
+console.log(boutonsNav)
+//Creer un listenner au click sur l'élément "login" = afficher la section id #contact
+function lancerBoutonsNav() {
+    boutonsNav.addEventListener('click', (index) => {
+        const button = event.target.index;
+        if (button === 0) { get / index.html }
+        else if (button === 1) { get / index.html }
+        else if (button === 2) { get / login.html }
+    })
+}
+lancerBoutonsNav();
+//______________________________
 Notes: 
-Return "map" -> permet de transformé les informations recupérées et filtrées en HTML
+Via la fonction ObjetsFilter = Return "map" -> permet de transformé les informations recupérées et filtrées en HTML

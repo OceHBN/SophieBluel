@@ -2,7 +2,7 @@
 window.addEventListener("load", (event) => {
     console.log("La page est complètement chargée");
 });
-// Activer les boutons filtres via le backend en API
+// FILTRES via le backend en API
 //Fonction pour filtrer les objets par catégorie
 function filterObjects(works) {
     const workObjets = works.filter(work => work.categoryId === 1);
@@ -25,7 +25,6 @@ function filterAppartements(works) {
         </div>
     `).join('');
 }
-
 
 function filterHotels(works) {
     const workHotels = works.filter(work => work.categoryId === 3);
@@ -85,17 +84,28 @@ function boutons() {
 
 boutons();
 
+//PAGE DE CONNEXION
+//Recupérer la liste de navigation
+const boutonsNav = document.querySelectorAll('ul > li')
+console.log(boutonsNav)
+//Creer un listenner au click sur l'élément "login" = afficher la section id #contact
+function lancerBoutonsNav() {
+    boutonsNav.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            // Redirection basée sur l'index du bouton
+            if (index === 0) {
+                console.log("Redirection vers : /FrontEnd/index.html");
+                window.location.href = '/FrontEnd/index.html';
+            } else if (index === 1) {
+                console.log("Redirection vers : /FrontEnd/index.html");
+                window.location.href = '/FrontEnd/index.html';
+            } else if (index === 2) {
+                console.log("Redirection vers : /FrontEnd/login.html");
+                window.location.href = '/FrontEnd/login.html';
+            }
+        });
+    });
+}
 
-//console.log(btnTous)
-//console.log(btnObjects)
-//console.log(btnAppartements)
-//console.log(btnHotels)
-
-
-// afficher le contenue = fonction 
-//const figure = document.queryselector(figure)
-//function displayCategory(img, frigcaption) {}
-
-
-//Utiliser la fonction Filter + peut-etre faire un tableau par catégorie, pour appeler la fonction//
-//.innerHTML permet de modifer les balises HTML (supp, ajout)
+// Exécuter la fonction pour configurer les boutons
+lancerBoutonsNav();

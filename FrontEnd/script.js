@@ -67,6 +67,7 @@ function boutons() {
     boutonsFiltres.forEach(button => {
         button.addEventListener('click', (event) => {
             const idButton = event.target.id;
+            event.preventDefault();
             console.log("bouton ok ", idButton);
 
             if (idButton === 'tous') {
@@ -92,6 +93,7 @@ console.log(boutonsNav)
 function lancerBoutonsNav() {
     boutonsNav.forEach((button, index) => {
         button.addEventListener('click', () => {
+            event.preventDefault();
             // Redirection basée sur l'index du bouton
             if (index === 0) {
                 console.log("Redirection vers : /FrontEnd/index.html");
@@ -106,6 +108,69 @@ function lancerBoutonsNav() {
         });
     });
 }
+lancerBoutonsNav()
 
-// Exécuter la fonction pour configurer les boutons
-lancerBoutonsNav();
+//Activer le bouton "se connecter"
+function lancerConnexion() {
+    const connexion = document.getElementById('connexion')
+    if (!connexion) {
+        console.error("Formulaire de connexion non trouvé !");
+        return;
+    }
+}
+connexion.addEventListener("submit", function (event) {
+    event.preventDefault();
+    // Création de l'objet de connexion
+    const emailField = connexion.querySelector("[name=email]");
+    const passwordField = connexion.querySelector("[name=password]");
+
+    if (!emailField || !passwordField) {
+        console.error("Champs email ou password manquants dans le formulaire !");
+        return;
+    }
+
+    const connexionInfos = {
+        email: emailField.value,
+        password: passwordField.value,
+    };
+    //charge utile => format JSON
+    const chargeUtile = JSON.stringify(connexionInfos)
+    console.log("Données envoyées :", chargeUtile);
+    // Fetch pour envoyer les infos de connexion
+    fetch('http://localhost:5678/api/auth/login', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer <eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4>"
+        },
+        body: chargeUtile, // Envoie de la charge utile
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log("Redirection vers : /FrontEnd/index.html");
+
+                // Modifier le texte du bouton
+                if (boutonsNav[2].innerText === "login") {
+                    boutonsNav[2].innerText = "logout";
+                }
+
+                // Retourner les données JSON
+                return response.json();
+            } else {
+                throw new Error("Erreur lors de la connexion");
+            }
+        })
+        .then(data => {
+            console.log("Connexion réussie :", data);
+
+            // Stockage des informations dans le localStorage
+            window.localStorage.setItem("email", connexionInfos.email);
+            window.localStorage.setItem("token", data.token);
+
+        })
+        .catch(error => {
+            console.error("Erreur lors de la connexion :", error);
+        });
+}
+)
+lancerConnexion()

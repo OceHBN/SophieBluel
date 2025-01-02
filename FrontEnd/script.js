@@ -133,6 +133,8 @@ connexion.addEventListener("submit", function (event) {
         email: emailField.value,
         password: passwordField.value,
     };
+
+    console.log("email et password ok :", connexionInfos)
     //charge utile => format JSON
     const chargeUtile = JSON.stringify(connexionInfos)
     console.log("Données envoyées :", chargeUtile);
@@ -149,10 +151,9 @@ connexion.addEventListener("submit", function (event) {
             if (response.ok) {
                 console.log("Redirection vers : /FrontEnd/index.html");
 
-                // Modifier le texte du bouton
-                if (boutonsNav[2].innerText === "login") {
-                    boutonsNav[2].innerText = "logout";
-                }
+                // Ouvrir une nouvelle fenêtre pour la page edit.html
+                // window.open('http://127.0.0.1:5500/FrontEnd/edit.html', '_blank');
+
 
                 // Retourner les données JSON
                 return response.json();

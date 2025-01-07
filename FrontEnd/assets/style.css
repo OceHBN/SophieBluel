@@ -145,7 +145,9 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	position: relative;
+	padding-top: 30px;
 }
 
 /* Bandeau noir mode edition */
@@ -153,6 +155,11 @@ header {
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
 	width: 100%;
 	margin: 0;
 	height: 59px;
@@ -238,24 +245,6 @@ li:hover {
 
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
-}
-
-/* Projets mode edition */
-.projets {
-	display: flex;
-	flex-direction: row;
-	gap: 20px;
-	align-items: center;
-	justify-content: center;
-}
-
-.modifier {
-	display: flex;
-	flex-direction: row;
-	gap: 10px;
-	align-items: center;
-	justify-content: center;
 	margin-bottom: 1em;
 }
 
@@ -393,4 +382,156 @@ footer nav ul {
 
 #login p {
 	text-decoration: underline;
+}
+
+/* Projets mode edition */
+.projets {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+}
+
+.modifier {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1em;
+}
+
+/* Modal */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.09);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-wrapper1 {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+	background-color: white;
+	padding: 50px;
+	width: 630px;
+	height: 688px;
+	max-width: calc(100vw-20px);
+	max-height: calc(100vh-20px);
+	overflow: auto;
+	border-radius: 10px;
+	position: relative;
+}
+
+.close {
+	cursor: pointer;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+.modal-wrapper1 h3 {
+	font-size: 1.5rem;
+}
+
+.gallery2 {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	position: relative;
+}
+
+.gallery2 figure {
+	position: relative;
+}
+
+.gallery2 img {
+	width: 100%;
+}
+
+.gallery2 .poubelle {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+
+.line {
+	border: 0.5px solid;
+	border-color: gray;
+	width: 420px;
+}
+
+.ajoutPhoto {
+	cursor: pointer;
+	background-color: #1D6154;
+	border-radius: 20px;
+	border: none;
+	color: white;
+	padding: 10px;
+	width: 237px;
+	height: 36px;
+	font-family: 'Syne';
+}
+
+.modal-wrapper2 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	background-color: white;
+	padding: 50px;
+	width: 630px;
+	height: 688px;
+	max-width: calc(100vw-20px);
+	max-height: calc(100vh-20px);
+	overflow: auto;
+	border-radius: 10px;
+	position: relative;
+}
+
+.modal-wrapper2 h3 {
+	font-size: 1.5rem;
+}
+
+.inserImg {
+	width: 420px;
+	height: 169px;
+	padding: 20px;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	background-color: #E8F1F6;
+}
+
+input .addPhoto {
+	background-color: grey;
+	border-radius: 20px;
+}
+
+.infos {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.bulleTitre,
+.bulleCategories {
+	width: 420px;
+	height: 51px;
+	border: solid #E8F1F6;
+	box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.14);
 }

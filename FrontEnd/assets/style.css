@@ -498,6 +498,7 @@ footer nav ul {
 	overflow: auto;
 	border-radius: 10px;
 	position: relative;
+	display: none;
 }
 
 .modal-wrapper2 h3 {

@@ -112,13 +112,13 @@ let modal = null
 const openModal = function (e) {
     e.preventDefault()
     const target = document.querySelector(e.target.getAttribute('href'))
-    target.style.display = null
+    target.style.display = 'block'
     target.removeAttribute('aria-hidden')
     target.setAttribute('aria-modal', 'true')
     modal = target
     modal.addEventListener('click', closeModal)
-    modal.querySelector('js-modal-close').addEventListener('click', closeModal)
-    modal.querySelector('js-modal-stop').addEventListener('click', stopPropagation)
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
 const closeModal = function (e) {
@@ -128,8 +128,8 @@ const closeModal = function (e) {
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute('aria-modal')
     modal.removeEventListener('click', closeModal)
-    modal.querySelector('js-modal-close').removeEventListener('click', closeModal)
-    modal.querySelector('js-modal-stop').removeEventListener('click', stopPropagation)
+    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null
 
 }
@@ -139,20 +139,94 @@ const stopPropagation = function (e) {
 }
 
 
-document.querySelectorAll('.js-modal').forEach(a => {
+document.querySelectorAll('.js-open-modal').forEach(a => {
     a.addEventListener('click', openModal)
 })
 
 //DELETE
-const deleteImg = function (e) {
-    e.preventDefault
+async function gallery2() {
+    try {
+        const response = await fetch('http://localhost:5678/api/works');
+        const works = await response.json();
 
+        // Ajoute dynamiquement les IDs de l'API aux figures HTML
+        const figures = document.querySelectorAll('.gallery2 figure');
+        works.forEach((work, index) => {
+            if (figures[index]) {
+                figures[index].dataset.id = work.id; // Ajout dynamique du data-id
+            }
+        });
+    } catch (error) {
+        console.error('Erreur lors du chargement de la galerie :', error);
+    }
 }
 
-document.querySelectorAll('poubelle').forEach(a => {
-    a.addEventListener('click', deleteImg)
-})
-//FONCTION
+const deleteImg = function (e) {
+    e.preventDefault();
+
+    const token = localStorage.getItem('authToken'); // Récupère le token d'authentification
+    if (!token) {
+        console.error('Erreur : Aucun token trouvé.');
+        return;
+    }
+
+    const imageId = e.target.closest('figure')?.dataset.id; // Récupère l'ID de l'image
+    if (!imageId) {
+        console.error('Erreur : Aucun ID d\'image trouvé.');
+        return;
+    }
+
+    fetch(`http://localhost:5678/api/works/${imageId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Échec de la suppression. Code : ${response.status}`);
+            }
+            console.log('Image supprimée avec succès');
+            e.target.closest('figure').remove(); // Supprime l'élément du DOM
+        })
+        .catch(error => console.error('Erreur :', error));
+};
+
+document.querySelectorAll('.poubelle').forEach(a => {
+    a.addEventListener('click', deleteImg);
+});
+
+//AJOUTER UNE PHOTO 
+// Récupérer les éléments du DOM
+const modalWrapper1 = document.querySelector(".modal-wrapper1");
+const modalWrapper2 = document.querySelector(".modal-wrapper2");
+const ajoutPhotoButton = document.querySelector(".ajoutPhoto");
+
+// Cacher modal-wrapper1 et afficher modal-wrapper2 au clic sur le bouton "AjoutPhoto"
+ajoutPhotoButton.addEventListener("click", function (event) {
+    // Empêcher l'action par défaut du bouton (si nécessaire)
+    event.preventDefault();
+
+    // Cacher modal-wrapper1
+    modalWrapper1.style.display = "none";
+
+    // Afficher modal-wrapper2
+    modalWrapper2.style.display = "block";
+});
+
+// Optionnel: Fermer la modal en cliquant sur l'icône de fermeture
+const closeButtons = document.querySelectorAll(".js-modal-close");
+closeButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        // Cacher les modals lorsque l'utilisateur clique sur l'icône de fermeture
+        modalWrapper1.style.display = "none";
+        modalWrapper2.style.display = "none";
+    });
+});
+
+//FONCTIONS
 gallery()
 boutons()
 lancerBoutonsNav()
+gallery2()

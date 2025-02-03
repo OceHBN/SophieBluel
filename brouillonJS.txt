@@ -40,3 +40,36 @@ lancerBoutonsNav();
 //______________________________
 Notes: 
 Via la fonction ObjetsFilter = Return "map" -> permet de transformé les informations recupérées et filtrées en HTML
+
+//AJOUTS DES WORKS
+const categorie = document.querySelector('.bulleCategorie')
+async function addImg(e) {
+    e.preventDefault
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+        console.error('Erreur : Aucun token trouvé.');
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5678/api/works}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Échec d ajout');
+        }
+
+        console.log('Image ajoutée avec succès');
+        e.target.closest('figure').add();
+    } catch (error) {
+        console.error('Erreur lors de la suppression :', error);
+    } 
+}
+
+accès au swagger : http://localhost:5678/api-docs/#/default/get_categories

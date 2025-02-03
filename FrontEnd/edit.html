@@ -57,59 +57,13 @@
                 <div class="modifier">
                     <i class="fa-regular fa-pen-to-square"></i>
                     <a href="#modal" class="js-open-modal">modifier</a>
-                    <aside id="modal" class="modal js-modal" aria-hidden="true" role="dialog"
-                        aria-labelledby="titlemodal" style="display: none;">
+                    <aside id="modal" class="modal js-modal" aria-hidden="true" aria-labelledby="titlemodal"
+                        style="display: none;">
                         <!-- Modal WRAPPER 1 -->
                         <div class="modal-wrapper1 js-modal-stop">
                             <h3 id="titlemodal">Galerie Photo</h3>
                             <i class="fa-solid fa-xmark close js-modal-close"></i>
                             <div class="gallery2">
-                                <figure>
-                                    <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/restaurant-sushisen-londres.png"
-                                        alt="Restaurant Sushisen - Londres">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
-                                <figure>
-                                    <img src="assets/images/hotel-first-arte-new-delhi.png"
-                                        alt="Hotel First Arte - New Delhi">
-                                    <i class="fa-solid fa-trash-can poubelle"></i>
-                                </figure>
                             </div>
                             <div class="line"></div>
                             <button class="ajoutPhoto">Ajouter une photo</button>
@@ -119,22 +73,31 @@
                             <h3>Ajout photo</h3>
                             <i class="fa-solid fa-xmark close js-modal-close"></i>
                             <div class="inserImg">
-                                <i class="fa-regular fa-image"></i>
-                                <input class="addPhoto" type="file" id="addPhoto" accept="image/png, image/jpeg">
-                                <p>jpg, png : 4mo max</p>
+                                <div class="cadre">
+                                    <i class="imgInput fa-regular fa-image fa-2xl"></i>
+                                    <form enctype="multipart/form-data" method="post" name="fileinfo"
+                                        class="formulaire"></form>
+                                    <div>
+                                        <label for="fileInput" class="addPhoto">+ Ajouter une photo</label>
+                                        <input type="file" id="fileInput" accept="image/png, image/jpeg">
+                                        <img id="imagePreview" alt="Aperçu de l'image" style="display: none">
+                                    </div>
+                                    <p>jpg, png : 4mo max</p>
+                                </div>
+                                <div class="infos">
+                                    <p>Titre</p>
+                                    <input type="text" name="fileTitle" size="12" maxlength="32" class="bulleTitre" />
+
+                                    <p>Catégories</p>
+                                    <select name="categoryID" class="bulleCategories"></select>
+                                </div>
+                                <div class="line"></div>
+                                <button type="submit" class="ajoutPhoto submit">Valider</button>
+
                             </div>
-                            <div class="infos">
-                                <p>Titre</p>
-                                <div class="bulleTitre"></div>
-                                <p>Catégories</p>
-                                <div class="bulleCategories"></div>
-                            </div>
-                            <div class="line"></div>
-                            <button class="ajoutPhoto">Valider</button>
                         </div>
                     </aside>
                 </div>
-            </div>
             </div>
             <!-- Filtres -->
             <div class="filtres">

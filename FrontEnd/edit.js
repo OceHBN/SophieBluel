@@ -148,15 +148,14 @@ document.querySelectorAll('.js-open-modal').forEach((a) => {
 async function gallery2() {
     try {
         const response = await fetch('http://localhost:5678/api/works');
-        if (!response.ok) {
-            throw new Error('Erreur lors de la récupération des données');
-        }
+        if (!response.ok) return;
+
         const works = await response.json();
 
         // Sélectionne l'élément de la galerie
         const galleryContainer = document.querySelector('.gallery2');
         if (!galleryContainer) {
-            console.error('Erreur : Élément .gallery2 non trouvé dans le DOM.');
+
             return;
         }
 
@@ -183,8 +182,7 @@ async function gallery2() {
             figure.appendChild(deleteIcon);
             galleryContainer.appendChild(figure);
         });
-    } catch (error) {
-        console.error('Erreur lors du chargement de la galerie :', error);
+    } catch {
     }
 }
 
@@ -194,13 +192,11 @@ async function deleteImg(e) {
 
     const token = localStorage.getItem('token');
     if (!token) {
-        console.error('Erreur : Aucun token trouvé.');
         return;
     }
 
     const imageId = e.target.closest('figure')?.dataset.id;
     if (!imageId) {
-        console.error("Erreur : Aucun ID d'image trouvé.");
         return;
     }
 
@@ -213,9 +209,7 @@ async function deleteImg(e) {
             },
         });
 
-        if (!response.ok) {
-            throw new Error('Échec de la suppression');
-        }
+        if (!response.ok) return;
 
         console.log('Image supprimée avec succès');
         e.target.closest('figure').remove();
@@ -228,8 +222,7 @@ async function deleteImg(e) {
         await gallery2(); // Recharge la galerie modale
 
         console.log('Work supprimé avec succès et galeries mises à jour.');
-    } catch (error) {
-        console.error('Erreur lors de la suppression du work :', error);
+    } catch {
     }
 }
 
@@ -257,7 +250,7 @@ async function loadCategories() {
     console.log("catego recup")
     try {
         const response = await fetch('http://localhost:5678/api/categories');
-        if (!response.ok) throw new Error('Erreur lors du chargement des catégories');
+        if (!response.ok) return;
 
         const categories = await response.json();
         console.log(categories)
@@ -279,8 +272,7 @@ async function loadCategories() {
             const selectedCategoryId = e.target.value;
             loadWorksByCategory(selectedCategoryId); // Charger les works pour la catégorie sélectionnée
         });
-    } catch (error) {
-        console.error('Erreur lors du chargement des catégories :', error);
+    } catch {
     }
 }
 
@@ -323,7 +315,7 @@ async function addWork(event) {
 
     try {
         const token = localStorage.getItem('token');
-        if (!token) throw new Error('Utilisateur non authentifié');
+        if (!token) return;
 
         const response = await fetch('http://localhost:5678/api/works', {
             method: 'POST',
@@ -333,10 +325,7 @@ async function addWork(event) {
             body: formData, // Envoyer les données dans le body sous format multipart/form-data
         });
 
-        if (!response.ok) {
-            const errorDetails = await response.json();
-            throw new Error(`Erreur lors de l’ajout du work : ${errorDetails.error || 'Unknown error'}`);
-        }
+        if (!response.ok) return;
 
         const newWork = await response.json();
 
@@ -352,8 +341,7 @@ async function addWork(event) {
         document.getElementById("imagePreview").style.display = "none"; // Cacher la preview
 
         console.log('Work ajouté avec succès et galeries mises à jour.');
-    } catch (error) {
-        console.error('Erreur lors de l’ajout du work :', error);
+    } catch {
     }
 }
 

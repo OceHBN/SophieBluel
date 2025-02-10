@@ -28,10 +28,7 @@ function lancerBoutonsNav() {
 //Activer le bouton "se connecter"
 function lancerConnexion() {
     const connexion = document.getElementById('connexion')
-    if (!connexion) {
-        console.error("Formulaire de connexion non trouvé !");
-        return;
-    }
+    if (!connexion) return;
 }
 connexion.addEventListener("click", function (event) {
     event.preventDefault();
@@ -39,10 +36,7 @@ connexion.addEventListener("click", function (event) {
     const emailField = document.getElementById('email');
     const passwordField = document.getElementById('password');
 
-    if (!emailField || !passwordField) {
-        console.error("Champs email ou password manquants dans le formulaire !");
-        return;
-    }
+    if (!emailField || !passwordField) return;
 
     const connexionInfos = {
         email: emailField.value,
@@ -66,11 +60,11 @@ connexion.addEventListener("click", function (event) {
                 console.log("Redirection vers : /FrontEnd/edit.html");
 
                 // Ouvrir une nouvelle fenêtre pour la page edit.html
-                window.location.href = 'http://127.0.0.1:5500/FrontEnd/edit.html', '_blank';
+                window.location.href = 'http://127.0.0.1:5501/FrontEnd/edit.html', '_blank';
                 // Retourner les données JSON
                 return response.json();
             } else {
-                throw new Error("Erreur lors de la connexion");
+
             }
         })
         .then(data => {
@@ -81,9 +75,7 @@ connexion.addEventListener("click", function (event) {
             window.localStorage.setItem("token", data.token);
 
         })
-        .catch(error => {
-            console.error("Erreur lors de la connexion :", error);
-        });
+        .catch(() => { });
 }
 )
 //FONCTIONS
